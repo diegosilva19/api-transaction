@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
 
-class UserseController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
