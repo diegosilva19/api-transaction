@@ -21,7 +21,7 @@ class UserSellerTableMigration extends Migration
             $table->string('username', 50);
             $table->integer('user_id');
 
-            $table->unique(['user_id']);
+            $table->unique(['id_user']);
 
 
         });
@@ -36,7 +36,7 @@ class UserSellerTableMigration extends Migration
     {
 
         Schema::table('user_seller', function (Blueprint $table) {
-            $table->dropUnique(['user_id']);
+            $table->dropUnique(['id_user']);
         });
 
         Schema::dropIfExists('user_seller');

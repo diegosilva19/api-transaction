@@ -19,8 +19,10 @@ $router->get('/', function () use ($router) {
 $router->group([
     'prefix'=> 'users',
 ], function() use ($router) {
-    $router->get('/', 'UserController@get');
-    $router->get('/{user_id}', 'UserController@get');
-    $router->post('store', 'UserController@store');
+    $router->get('/', 'UserController@get'); //return base na query string
+    $router->post('/', 'UserController@store');// insert user
+    $router->post('/consumers', 'UserController@store'); //bond user to  type account consumer   max 1 account
+    $router->post('/sellers', 'UserController@store'); //bond user to  type account consumer  max 1 account
+    $router->get('/{user_id}', 'UserController@getById'); //get id by id
 });
 

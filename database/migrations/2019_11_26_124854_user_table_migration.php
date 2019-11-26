@@ -21,12 +21,10 @@ class UserTableMigration extends Migration
 
             $table->string('username', 50)->comment('test user dev')->nullable();
 
-            $table->string('password', 80);
+            $table->string('password', 25);
             $table->string('phone_number',9);
 
             $table->index(['full_name'], 'user_full_name_search_index');
-            $table->unique('email', 'unique_email');
-            $table->unique('cpf', 'unique_cpf');
         });
     }
 
@@ -39,8 +37,6 @@ class UserTableMigration extends Migration
     {
         Schema::table('user', function (Blueprint $table) {
             $table->dropIndex('user_full_name_search_index');
-            $table->dropUnique('unique_email');
-            $table->dropUnique('unique_cpf');
         });
 
         Schema::dropIfExists('user');
