@@ -12,4 +12,6 @@ class HttpStatusApi
     public const SUCCESS_CREATED = 201;
     public const SUCCESS_WITHOUT_ACTION = 200;
     public const USER_NOT_FOUND = 404;
+
+    public const TRANSACTION_NOT_AUTHORIZED = 401;
 }

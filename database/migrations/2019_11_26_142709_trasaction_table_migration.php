@@ -17,7 +17,7 @@ class TrasactionTableMigration extends Migration
             $table->increments('id');
             $table->integer('payee_id');
             $table->integer('payer_id');
-            $table->decimal('ammount', 15,2);
+            $table->decimal('amount', 15,2);
             $table->string('authorization_code', 37)->nullable();//->default(DB::raw('select UUID()'));
             $table->timestamp('date_transaction')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

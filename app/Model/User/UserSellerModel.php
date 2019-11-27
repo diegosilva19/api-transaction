@@ -27,4 +27,20 @@ class UserSellerModel extends Model
         }
         return true;
     }
+
+    public function getAccounBalanceByIdSeller ($sellerId)
+    {
+        $resultSet = DB::table('user_seller as sel')
+            ->select(['sel.id', 'balance.amount'])
+            ->join('user as us','us.id', '=', 'sel.id_user')
+            ->join('user_account_balance as balance','balance.id_user', '=', 'us.id')
+            ->where('sel.id', '=', $sellerId)
+            ->where('balance.type_user_account', 'seller')
+            ->get();
+
+        if (count($resultSet) == 0) {
+            return false;
+        }
+        return $resultSet;
+    }
 }

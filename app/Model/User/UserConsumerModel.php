@@ -31,4 +31,21 @@ class UserConsumerModel extends Model
         }
         return true;
     }
+
+    public function getAccounBalanceByIdConsumer ($consumerId)
+    {
+
+        $resultSet = DB::table('user_consumer as cons')
+            ->select(['cons.id', 'balance.amount'])
+            ->join('user as us','us.id', '=', 'cons.id_user')
+            ->join('user_account_balance as balance','balance.id_user', '=', 'us.id')
+            ->where('cons.id', $consumerId)
+            ->where('balance.type_user_account', 'consumer')
+            ->get();
+
+        if (count($resultSet) == 0) {
+            return false;
+        }
+        return $resultSet;
+    }
 }

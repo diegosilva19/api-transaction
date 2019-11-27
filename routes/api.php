@@ -26,3 +26,12 @@ $router->group([
     $router->get('/{user_id}', 'UserController@getById'); //get id by id
 });
 
+
+$router->group([
+    'prefix'=> 'transaction',
+], function() use ($router) {
+    $router->post('/', 'TransactionController@store');// insert user
+    $router->get('/{transaction_id}', 'TransactionController@get'); //return base na query string
+
+});
+
