@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\StringHelper;
 use App\Library\ModelRequestFactory;
 use App\Library\Validator\Request\CnpjRule;
+use App\Library\Validator\Request\CompleteNameRule;
 use App\Library\Validator\Request\CpftRule;
 
+use App\Library\Validator\Request\EmailRule;
 use App\Library\Validator\Request\HttpStatusApi;
+use App\Library\Validator\Request\PhoneNumberlRule;
 use App\Library\Validator\Request\ValidatorRequest;
 use App\Model\User\UserAccountBalanceModel;
 use App\Model\User\UserConsumerModel;
 use App\Model\User\UserModel;
+use Faker\Provider\PhoneNumber;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -125,10 +130,10 @@ class UserController extends Controller
 
         $validatorRequest= new ValidatorRequest($request,  [
             'cpf'=> ['required', new CpftRule],
-            'email'=> 'required|max:100',
-            'full_name'=> 'required|max:100',
-            'password'=> 'required|max:25',
-            'phone_number'=> 'required|max:14'
+            'email'=> ['required','max:100', new EmailRule] ,
+            'full_name'=> ['required','max:100', new CompleteNameRule],
+            'password'=> ['required','max:25'],
+            'phone_number'=> ['required', new PhoneNumberlRule]
         ]);
 
         if(!$validatorRequest->validate()) {
@@ -144,6 +149,8 @@ class UserController extends Controller
 
             if (!$foundedUser) {
                 try {
+                    $userModel->cpf = StringHelper::normalizeCnpjCpf($userModel->cpf);
+                    $userModel->phone_number = StringHelper::normalizePhoNumber($userModel->phone_number);
                     $userModel->save();
                     $response['json']= $userModel->jsonSerialize();
                     $response['status']=HttpStatusApi::SUCCESS_CREATED;

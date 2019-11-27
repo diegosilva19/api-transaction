@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\StringHelper;
 use App\Library\ModelRequestFactory;
 use App\Library\Validator\Request\CnpjRule;
 use App\Library\Validator\Request\CpftRule;
@@ -63,6 +64,7 @@ class UserSellerController extends Controller
 
             if (!$checkRelationShip) {
                 try {
+                    $sellerModel->cnpj= StringHelper::normalizeCnpjCpf($sellerModel->cnpj);
                     $sellerModel->id_user=  $foundedUser[0]->id;
                     $sellerModel->save();
 

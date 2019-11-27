@@ -8,7 +8,7 @@ class ValidatorRequest
     protected $rules;
     protected $messages;
     protected $customAttributes;
-    protected $errors;
+    protected $errors=[];
 
 
     public function __construct(Request $request,  array $rules, array $messages = [], array $customAttributes= [])

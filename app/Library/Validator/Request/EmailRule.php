@@ -3,21 +3,17 @@
 
 namespace App\Library\Validator\Request;
 
-use App\Helpers\StringHelper;
 use Illuminate\Contracts\Validation\ImplicitRule;
 
-class CpftRule implements ImplicitRule
+class EmailRule implements ImplicitRule
 {
 
     public function passes($attribute, $value)
     {
-        $cpfNumber = StringHelper::normalizeCnpjCpf($value);
-
-        if (strlen($cpfNumber) != 11) {
+        if (preg_match('/[a-z0-9._-]+@[a-z0-9_]+\.[a-z0-9._]+/im', $value) == 0) {
             return false;
         }
-
-        return true;
+       return true;
     }
 
     public function message()

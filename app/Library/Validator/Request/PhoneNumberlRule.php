@@ -6,18 +6,18 @@ namespace App\Library\Validator\Request;
 use App\Helpers\StringHelper;
 use Illuminate\Contracts\Validation\ImplicitRule;
 
-class CpftRule implements ImplicitRule
+class PhoneNumberlRule implements ImplicitRule
 {
 
     public function passes($attribute, $value)
     {
-        $cpfNumber = StringHelper::normalizeCnpjCpf($value);
+        $phoneNumber=  StringHelper::normalizePhoNumber($value);
+        $numberLength=  strlen($phoneNumber);
 
-        if (strlen($cpfNumber) != 11) {
+        if ($numberLength < 8  && $numberLength > 14) {
             return false;
         }
-
-        return true;
+       return true;
     }
 
     public function message()
