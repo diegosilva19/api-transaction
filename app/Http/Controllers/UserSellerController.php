@@ -75,10 +75,12 @@ class UserSellerController extends Controller
                     $accountBalance->id_user = $foundedUser[0]->id;
                     $accountBalance->type_user_account = 'seller';
                     $accountBalance->save();
-                } catch(Exception $e) {
+                } catch(Exception $ex) {
                     $response['status']= HttpStatusApi::INTERNAL_SERVER_ERROR;
                     $response['json']['code']= HttpStatusApi::INTERNAL_SERVER_ERROR;
                     $response['json']['message']= 'Erro ao inserir no banco de dados';
+                    Log::error("Apicacao com erro requisição banco de dados ");
+                    Log::error($ex->getMessage());
                 }
             } else {
                 $response['json']['message']= "Usuario já cadastrado como seller";
