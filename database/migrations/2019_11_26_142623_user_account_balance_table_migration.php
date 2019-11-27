@@ -17,7 +17,7 @@ class UserAccountBalanceTableMigration extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->enum('type_user_account', ['seller', 'consumer']);
-            $table->decimal('amount', 15, 2);
+            $table->decimal('amount', 15, 2)->default('0.00');
         });
     }
 

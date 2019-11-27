@@ -8,6 +8,8 @@ use App\Library\Validator\Request\CpftRule;
 
 use App\Library\Validator\Request\HttpStatusApi;
 use App\Library\Validator\Request\ValidatorRequest;
+use App\Model\User\UserAccountBalanceModel;
+use App\Model\User\UserConsumerModel;
 use App\Model\User\UserModel;
 use Illuminate\Http\Request;
 use Exception;
@@ -64,24 +66,17 @@ class UserController extends Controller
                 try {
                     $userModel->save();
                     $response['json']= $userModel->jsonSerialize();
+                    $response['status']=HttpStatusApi::SUCCESS_CREATED;
                 } catch (\PDOException $e) {
                     $response['status']= HttpStatusApi::INTERNAL_SERVER_ERROR;
                     $response['json']['code']= HttpStatusApi::INTERNAL_SERVER_ERROR;
                     $response['json']['message']= 'Erro ao inserir no banco de dados';
                 }
+            } else {
+                $response['json']['message']= "Usuario já cadastrado";
             }
         }
         return response()->json($response['json'], $response['status']);
-    }
-
-    public function storeConsumer(Request $request)
-    {
-
-    }
-
-    public function storeSeller(Request $request)
-    {
-
     }
 
     public function destroy($id)

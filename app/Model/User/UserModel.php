@@ -9,17 +9,13 @@ use Illuminate\Support\Facades\DB;
 class UserModel extends Model
 {
     protected $table= 'user';
-
+    public $timestamps = false;
     protected $fillable = [
         'cpf', 'email', 'full_name',  'password', 'phone_number'
     ];
 
-    public $timestamps = false;
 
 
-    public function tete($stringClassNameSpace) {
-        dd(class_exists($stringClassNameSpace), $stringClassNameSpace);
-    }
     public function checkIsUniqueUser(string $email, string $cpf)
     {
         $table = DB::table('user')->select('id', 'cpf', 'email', 'full_name',  'password', 'phone_number');
@@ -30,5 +26,14 @@ class UserModel extends Model
              return true;
          }
          return false;
+    }
+
+    public function getUserById(string $id)
+    {
+        $resultSet = DB::table('user')->where('id', $id)->get();
+        if (count($resultSet) == 0) {
+            return false;
+        }
+        return $resultSet;
     }
 }
