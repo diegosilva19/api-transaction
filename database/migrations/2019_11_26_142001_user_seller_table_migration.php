@@ -19,7 +19,7 @@ class UserSellerTableMigration extends Migration
             $table->string('fantasy_name', 60);
             $table->string('social_name', 60);
             $table->string('username', 50);
-            $table->integer('user_id');
+            $table->integer('id_user');
 
             $table->unique(['id_user']);
 
