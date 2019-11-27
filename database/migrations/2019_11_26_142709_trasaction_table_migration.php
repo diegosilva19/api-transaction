@@ -36,6 +36,6 @@ class TrasactionTableMigration extends Migration
     public function down()
     {
         Schema::dropIfExists('transaction');
-        DB::unprepared('DROP TRIGGER before_insert_transaction_generate_authorization');
+        DB::unprepared('DROP TRIGGER IF EXISTS before_insert_transaction_generate_authorization');
     }
 }

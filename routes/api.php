@@ -28,7 +28,7 @@ $router->group([
 
 
 $router->group([
-    'prefix'=> 'transaction',
+    'prefix'=> 'transactions',
 ], function() use ($router) {
     $router->post('/', 'TransactionController@store');// insert user
     $router->get('/{transaction_id}', 'TransactionController@get'); //return base na query string

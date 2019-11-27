@@ -15,14 +15,14 @@ class UserTableMigration extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cpf');
+            $table->string('cpf', 11);
             $table->string('email', 100);
             $table->string('full_name', 100);
 
             $table->string('username', 50)->comment('test user dev')->nullable();
 
             $table->string('password', 25);
-            $table->string('phone_number',9);
+            $table->string('phone_number',14);
 
             $table->index(['full_name'], 'user_full_name_search_index');
         });
