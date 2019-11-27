@@ -36,8 +36,6 @@ class UserController extends Controller
         return response()->json(['status'=>$userId],200);
     }
 
-
-
     public function store(Request $request)
     {
         $response=['json'=>
@@ -77,10 +75,5 @@ class UserController extends Controller
             }
         }
         return response()->json($response['json'], $response['status']);
-    }
-
-    public function destroy($id)
-    {
-
     }
 }

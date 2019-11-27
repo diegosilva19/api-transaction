@@ -10,7 +10,13 @@ class CnpjRule implements ImplicitRule
 
     public function passes($attribute, $value)
     {
-        return strlen($value) == 12;
+        $validCnpj= true;
+        if (strlen($value) != 14) {
+            $validCnpj= false;
+        }
+
+
+        return $validCnpj;
     }
 
     public function message()

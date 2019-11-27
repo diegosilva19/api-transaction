@@ -22,7 +22,7 @@ $router->group([
     $router->get('/', 'UserController@get'); //return base na query string
     $router->post('/', 'UserController@store');// insert user
     $router->post('/consumers', 'UserConsumerController@store'); //bond user to  type account consumer   max 1 account
-    $router->post('/sellers', 'UserController@store'); //bond user to  type account consumer  max 1 account
+    $router->post('/sellers', 'UserSellerController@store'); //bond user to  type account consumer  max 1 account
     $router->get('/{user_id}', 'UserController@getById'); //get id by id
 });
 
