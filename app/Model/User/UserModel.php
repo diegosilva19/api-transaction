@@ -72,4 +72,23 @@ class UserModel extends Model
         }
         return false;
     }
+
+    public function checkUserNameIsAvailable(string $userAccount)
+    {
+
+        $userConsumer = DB::table('user_consumer')->select(DB::raw("id, 'consumer' AS table_origin"))
+            ->where('username', $userAccount);
+
+        $userSeller = DB::table('user_seller')->select(DB::raw("id, 'seller' AS table_origin"))
+            ->where('username', $userAccount)
+            ->union($userConsumer)
+            ->get();
+
+        if(count($userSeller) > 0) {
+            return false;
+        }
+        return true;
+    }
+
+
 }

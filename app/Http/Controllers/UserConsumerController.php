@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Library\Validator\Request\HttpStatusApi;
+use App\Library\Validator\Request\UserNameAvailableRule;
 use App\Library\Validator\Request\ValidatorRequest;
 use App\Model\User\UserAccountBalanceModel;
 use App\Model\User\UserConsumerModel;
@@ -28,11 +29,10 @@ class UserConsumerController extends Controller
 
         $validatorRequest= new ValidatorRequest($request,  [
             'user_id'=> ['required'],
-            'username'=> ['required', 'max:50'],
+            'username'=> ['required', 'max:50', new UserNameAvailableRule],
         ]);
 
         if(!$validatorRequest->validate()) {
-
             $response['status']= HttpStatusApi::VALIDATION_ERROR;
             $response['json']['code']= HttpStatusApi::VALIDATION_ERROR;
             $response['json']['message']= "Erros Encontrados: " .$validatorRequest->getErrosPrintable(" | ");

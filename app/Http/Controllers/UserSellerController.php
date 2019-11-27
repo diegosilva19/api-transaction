@@ -7,6 +7,7 @@ use App\Library\Validator\Request\CnpjRule;
 use App\Library\Validator\Request\CpftRule;
 
 use App\Library\Validator\Request\HttpStatusApi;
+use App\Library\Validator\Request\UserNameAvailableRule;
 use App\Library\Validator\Request\ValidatorRequest;
 use App\Model\User\UserAccountBalanceModel;
 use App\Model\User\UserConsumerModel;
@@ -37,7 +38,7 @@ class UserSellerController extends Controller
             'fantasy_name'=> ['required', 'max:60'],
             'social_name'=> ['required', 'max:60'],
             'user_id'=> ['required', 'max:25'],
-            'username'=> ['required', 'max:50']
+            'username'=> ['required', 'max:50', new UserNameAvailableRule],
         ]);
 
 
